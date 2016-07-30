@@ -92,7 +92,7 @@ public class EditCustomer extends HttpServlet {
         String message;
         Customer customer;
         
-        if((name != null) && (address != null) && (contact != null)){
+        if((id != null) && (name != null) && (address != null) && (contact != null)){
             customer = new Customer();
             customer.setId(Long.parseLong(id));
             customer.setName(name);
