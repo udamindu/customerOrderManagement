@@ -85,6 +85,7 @@ public class EditCustomer extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        String id = request.getParameter("id");
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String contact = request.getParameter("contact");
@@ -93,6 +94,7 @@ public class EditCustomer extends HttpServlet {
         
         if((name != null) && (address != null) && (contact != null)){
             customer = new Customer();
+            customer.setId(Long.parseLong(id));
             customer.setName(name);
             customer.setAddress(address);
             customer.setContactNumber(contact);
