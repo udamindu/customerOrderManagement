@@ -4,12 +4,10 @@
  */
 package web;
 
-import ejb.Customer;
-import ejb.CustomerFacade;
+import ejb.CustomerOrderFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Arunalu Hasakelum
  */
-@WebServlet(name = "RemoveCustomer", urlPatterns = {"/RemoveCustomer"})
-public class RemoveCustomer extends HttpServlet {
+@WebServlet(name = "UpdateCustomerOrder", urlPatterns = {"/UpdateCustomerOrder"})
+public class UpdateCustomerOrder extends HttpServlet {
     @EJB
-    private CustomerFacade customerFacade;
+    private CustomerOrderFacade customerOrderFacade;
 
     /**
      * Processes requests for both HTTP
@@ -45,10 +43,10 @@ public class RemoveCustomer extends HttpServlet {
              */
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RemoveCustomer</title>");            
+            out.println("<title>Servlet UpdateCustomerOrder</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RemoveCustomer at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateCustomerOrder at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
@@ -86,30 +84,9 @@ public class RemoveCustomer extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         String id = request.getParameter("id");
-        String name = request.getParameter("name");
-        String address = request.getParameter("address");
-        String contact = request.getParameter("contact");
-        String message;
-        Customer customer;
-        
-        if((id != null) && (name != null) && (address != null) && (contact != null)){
-            customer = new Customer();
-            customer.setId(Long.parseLong(id));
-            customer.setName(name);
-            customer.setAddress(address);
-            customer.setContactNumber(contact);
-            customerFacade.remove(customer);
-            message = "Customer edited successfully!";
-            request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/editCustomer.jsp");
-            rd.forward(request, response);
-        }
-        else{
-            message = "Failed to edit, try filling all fields!";
-            request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/editCustomer.jsp");
-            rd.forward(request, response);
-        }
+        String dueDate = request.getParameter("dueDate");
+        String comment = request.getParameter("comment");
+        String amount = request.getParameter("amount");
     }
 
     /**
