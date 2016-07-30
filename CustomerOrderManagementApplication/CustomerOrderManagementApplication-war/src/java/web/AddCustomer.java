@@ -9,6 +9,7 @@ import ejb.CustomerFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -97,6 +98,15 @@ public class AddCustomer extends HttpServlet {
             customer.setContactNumber(contact);
             customerFacade.create(customer);
             message = "Customer added successfully!";
+            request.setAttribute("message", message);
+	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/addCustomer.jsp");
+            rd.forward(request, response);
+        }
+        else{
+            message = "Failed to add, try filling all fields!";
+            request.setAttribute("message", message);
+	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/addCustomer.jsp");
+            rd.forward(request, response);
         }
     }
 
