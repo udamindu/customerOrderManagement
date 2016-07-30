@@ -101,13 +101,13 @@ public class RemoveCustomer extends HttpServlet {
             customerFacade.remove(customer);
             message = "Customer edited successfully!";
             request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/editCustomer.jsp");
+	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/removeCustomer.jsp");
             rd.forward(request, response);
         }
         else{
             message = "Failed to edit, try filling all fields!";
             request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/editCustomer.jsp");
+	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/removeCustomer.jsp");
             rd.forward(request, response);
         }
     }

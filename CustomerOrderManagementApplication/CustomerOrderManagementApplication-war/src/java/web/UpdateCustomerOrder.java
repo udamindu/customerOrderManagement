@@ -4,10 +4,13 @@
  */
 package web;
 
+import ejb.CustomerFacade;
+import ejb.CustomerOrder;
 import ejb.CustomerOrderFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -87,6 +90,27 @@ public class UpdateCustomerOrder extends HttpServlet {
         String dueDate = request.getParameter("dueDate");
         String comment = request.getParameter("comment");
         String amount = request.getParameter("amount");
+        String message;
+        CustomerOrder customerOrder;
+        
+        if((id != null) && (dueDate != null) && (comment != null) && (amount != null)){
+            customerOrder = new CustomerOrder();
+            customerOrder.setId(Long.parseLong(id));
+            customerOrder.setDueDate(dueDate);
+            customerOrder.setComment(comment);
+            customerOrder.setAmount(Double.parseDouble(amount));
+            customerOrderFacade.edit(customerOrder);
+            message = "Customer Order updated successfully!";
+            request.setAttribute("message", message);
+	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/editCustomerOrder.jsp");
+            rd.forward(request, response);
+        }
+        else{
+            message = "Failed to update, try filling all fields!";
+            request.setAttribute("message", message);
+	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/editCustomerOrder.jsp");
+            rd.forward(request, response);
+        }
     }
 
     /**
