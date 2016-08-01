@@ -113,15 +113,19 @@ public class AddCustomerOrder extends HttpServlet {
                 connection.close();
                 //response.sendRedirect("ListNews");
                 statusMessage = "Order added succesfully";
+                request.setAttribute("message", statusMessage);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/addCustomerOrder.jsp");
+                rd.forward(request, response);
 
             } catch (JMSException ex) {
                 ex.printStackTrace();
             }
-            finally{
-                //request.setAttribute("message", statusMessage);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/editCustomerOrder.jsp");
-                rd.forward(request, response);
-            }
+        }
+        else {
+            statusMessage = "Adding failed, try filling all fields!";
+            request.setAttribute("message", statusMessage);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/addCustomerOrder.jsp");
+            rd.forward(request, response);
         }
     }
 
