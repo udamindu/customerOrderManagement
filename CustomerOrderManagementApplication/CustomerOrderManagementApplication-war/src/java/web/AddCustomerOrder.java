@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.Resource;
 import javax.jms.*;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -111,9 +112,15 @@ public class AddCustomerOrder extends HttpServlet {
                 messageProducer.close();
                 connection.close();
                 //response.sendRedirect("ListNews");
+                statusMessage = "Order added succesfully";
 
             } catch (JMSException ex) {
                 ex.printStackTrace();
+            }
+            finally{
+                //request.setAttribute("message", statusMessage);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/editCustomerOrder.jsp");
+                rd.forward(request, response);
             }
         }
     }
