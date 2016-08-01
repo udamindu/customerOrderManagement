@@ -6,6 +6,9 @@ package web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.Resource;
+import javax.jms.ConnectionFactory;
+import javax.jms.Queue;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +21,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AddCustomerOrder", urlPatterns = {"/AddCustomerOrder"})
 public class AddCustomerOrder extends HttpServlet {
+    
+    @Resource(mappedName="jms/NewCustomerOrderFactory")
+    private ConnectionFactory connectionFactory;
 
+    @Resource(mappedName="jms/NewCustomerOrder")
+    private Queue queue;
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -78,7 +86,8 @@ public class AddCustomerOrder extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        
     }
 
     /**
