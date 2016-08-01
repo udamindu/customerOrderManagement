@@ -4,11 +4,11 @@
  */
 package web;
 
+import ejb.CustomerOrder;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.Resource;
-import javax.jms.ConnectionFactory;
-import javax.jms.Queue;
+import javax.jms.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -87,7 +87,35 @@ public class AddCustomerOrder extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        String dueDate = request.getParameter("dueDate");
+        String comment = request.getParameter("comment");
+        String amount = request.getParameter("amount");
+        String statusMessage;
         
+        if((dueDate != null) && (comment != null) && (amount != null)){
+            try {
+                Connection connection = connectionFactory.createConnection();
+                Session session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
+                        
+                MessageProducer messageProducer = session.createProducer(queue);
+
+                ObjectMessage message = session.createObjectMessage();
+                // here we create NewsEntity, that will be sent in JMS message
+                CustomerOrder customerOrder = new CustomerOrder();
+                customerOrder.setDueDate(dueDate);
+                customerOrder.setComment(comment);
+                customerOrder.setAmount(Double.parseDouble(amount));
+
+                message.setObject(customerOrder);
+                messageProducer.send(message);
+                messageProducer.close();
+                connection.close();
+                //response.sendRedirect("ListNews");
+
+            } catch (JMSException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     /**
