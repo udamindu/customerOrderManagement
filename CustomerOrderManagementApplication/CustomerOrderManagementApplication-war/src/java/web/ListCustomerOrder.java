@@ -4,8 +4,11 @@
  */
 package web;
 
+import ejb.CustomerOrderFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ListCustomerOrder", urlPatterns = {"/ListCustomerOrder"})
 public class ListCustomerOrder extends HttpServlet {
+    @EJB
+    private CustomerOrderFacade customerOrderFacade;
 
     /**
      * Processes requests for both HTTP
@@ -63,7 +68,8 @@ public class ListCustomerOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        List customerOrderList = customerOrderFacade.findAll();
     }
 
     /**
