@@ -94,6 +94,6 @@ public class ListCustomerOrder extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Returns a list of customer orders";
     }// </editor-fold>
 }
