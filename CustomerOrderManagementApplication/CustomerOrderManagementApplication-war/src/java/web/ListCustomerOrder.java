@@ -70,6 +70,8 @@ public class ListCustomerOrder extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         List customerOrderList = customerOrderFacade.findAll();
+        request.setAttribute("customerOrderList", customerOrderList);
+        request.getRequestDispatcher("").forward(request, response);
     }
 
     /**
