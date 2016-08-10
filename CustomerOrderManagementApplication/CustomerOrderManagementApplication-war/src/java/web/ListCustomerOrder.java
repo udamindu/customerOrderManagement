@@ -71,7 +71,7 @@ public class ListCustomerOrder extends HttpServlet {
         //processRequest(request, response);
         List customerOrderList = customerOrderFacade.findAll();
         request.setAttribute("customerOrderList", customerOrderList);
-        request.getRequestDispatcher("").forward(request, response);
+        request.getRequestDispatcher("/JSP/getCustomerOrders.jsp").forward(request, response);
     }
 
     /**

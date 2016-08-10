@@ -72,7 +72,7 @@ public class ViewCustomerOrder extends HttpServlet {
         String orderId = request.getParameter("orderId");
         CustomerOrder customerOrder = customerOrderFacade.find(orderId);
         request.setAttribute("customerOrder", customerOrder);
-        request.getRequestDispatcher("").forward(request, response);
+        request.getRequestDispatcher("/JSP/getCustomerOrder.jsp").forward(request, response);
     }
 
     /**
