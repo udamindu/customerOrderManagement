@@ -122,7 +122,7 @@ public class AddCustomerOrder extends HttpServlet {
                 
                 statusMessage = "Order added succesfully";
                 request.setAttribute("message", statusMessage);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/addCustomerOrder.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomerOrders.jsp");
                 rd.forward(request, response);
 
             } catch (JMSException ex) {
@@ -132,7 +132,7 @@ public class AddCustomerOrder extends HttpServlet {
         else {
             statusMessage = "Adding failed, try filling all fields!";
             request.setAttribute("message", statusMessage);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/addCustomerOrder.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomerOrders.jsp");
             rd.forward(request, response);
         }
     }
