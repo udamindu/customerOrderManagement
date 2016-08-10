@@ -99,13 +99,13 @@ public class AddCustomer extends HttpServlet {
             customerFacade.create(customer);
             message = "Customer added successfully!";
             request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/addCustomer.jsp");
+	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomers.jsp");
             rd.forward(request, response);
         }
         else{
             message = "Failed to add, try filling all fields!";
             request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/addCustomer.jsp");
+	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomers.jsp");
             rd.forward(request, response);
         }
     }
