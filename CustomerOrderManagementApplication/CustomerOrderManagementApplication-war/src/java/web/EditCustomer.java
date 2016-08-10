@@ -100,13 +100,13 @@ public class EditCustomer extends HttpServlet {
             customerFacade.edit(customer);
             message = "Customer edited successfully!";
             request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/editCustomer.jsp");
+	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomers.jsp");
             rd.forward(request, response);
         }
         else{
             message = "Failed to edit, try filling all fields!";
             request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/editCustomer.jsp");
+	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomers.jsp");
             rd.forward(request, response);
         }
     }
