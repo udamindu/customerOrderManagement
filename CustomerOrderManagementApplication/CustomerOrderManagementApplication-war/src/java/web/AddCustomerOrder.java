@@ -4,10 +4,12 @@
  */
 package web;
 
+import ejb.CustomerFacade;
 import ejb.CustomerOrder;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.jms.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,12 +24,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AddCustomerOrder", urlPatterns = {"/AddCustomerOrder"})
 public class AddCustomerOrder extends HttpServlet {
+    @EJB
+    private CustomerFacade customerFacade;
     
     @Resource(mappedName="jms/NewCustomerOrderFactory")
     private ConnectionFactory connectionFactory;
 
     @Resource(mappedName="jms/NewCustomerOrder")
     private Queue queue;
+    
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -88,6 +94,7 @@ public class AddCustomerOrder extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        String customerId = request.getParameter("customerId");
         String dueDate = request.getParameter("dueDate");
         String comment = request.getParameter("comment");
         String amount = request.getParameter("amount");
@@ -101,20 +108,21 @@ public class AddCustomerOrder extends HttpServlet {
                 MessageProducer messageProducer = session.createProducer(queue);
 
                 ObjectMessage message = session.createObjectMessage();
-                // here we create NewsEntity, that will be sent in JMS message
+                // here we create CustomerOrder entity, that will be sent in JMS message
                 CustomerOrder customerOrder = new CustomerOrder();
                 customerOrder.setDueDate(dueDate);
                 customerOrder.setComment(comment);
                 customerOrder.setAmount(Double.parseDouble(amount));
+                customerOrder.setCustomer(customerFacade.find(Long.parseLong(customerId)));
 
                 message.setObject(customerOrder);
                 messageProducer.send(message);
                 messageProducer.close();
                 connection.close();
-                //response.sendRedirect("ListNews");
+                
                 statusMessage = "Order added succesfully";
                 request.setAttribute("message", statusMessage);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/addCustomerOrder.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/addCustomerOrder.jsp");
                 rd.forward(request, response);
 
             } catch (JMSException ex) {
@@ -124,7 +132,7 @@ public class AddCustomerOrder extends HttpServlet {
         else {
             statusMessage = "Adding failed, try filling all fields!";
             request.setAttribute("message", statusMessage);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/addCustomerOrder.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/addCustomerOrder.jsp");
             rd.forward(request, response);
         }
     }
