@@ -86,28 +86,21 @@ public class RemoveCustomer extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         String id = request.getParameter("id");
-        String name = request.getParameter("name");
-        String address = request.getParameter("address");
-        String contact = request.getParameter("contact");
         String message;
         Customer customer;
         
-        if((id != null) && (name != null) && (address != null) && (contact != null)){
-            customer = new Customer();
-            customer.setId(Long.parseLong(id));
-            customer.setName(name);
-            customer.setAddress(address);
-            customer.setContactNumber(contact);
+        if(id != null){
+            customer = customerFacade.find(Long.parseLong(id));
             customerFacade.remove(customer);
-            message = "Customer edited successfully!";
+            message = "Customer removed successfully!";
             request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/removeCustomer.jsp");
+	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomers.jsp");
             rd.forward(request, response);
         }
         else{
-            message = "Failed to edit, try filling all fields!";
+            message = "Failed to remove the customer";
             request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/removeCustomer.jsp");
+	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomers.jsp");
             rd.forward(request, response);
         }
     }
