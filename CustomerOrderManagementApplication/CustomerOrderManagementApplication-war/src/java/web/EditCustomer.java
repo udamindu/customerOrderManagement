@@ -93,8 +93,7 @@ public class EditCustomer extends HttpServlet {
         Customer customer;
         
         if((id != null) && (name != null) && (address != null) && (contact != null)){
-            customer = new Customer();
-            customer.setId(Long.parseLong(id));
+            customer = customerFacade.find(Long.parseLong(id));
             customer.setName(name);
             customer.setAddress(address);
             customer.setContactNumber(contact);
