@@ -4,6 +4,7 @@
  */
 package web;
 
+import ejb.Customer;
 import ejb.CustomerFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -83,10 +84,9 @@ public class ListCustomers extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        List customerList = customerFacade.findAll();
+        List<Customer> customerList = customerFacade.findAll();
         request.setAttribute("customerList", customerList);
-        request.getRequestDispatcher("").forward(request, response);
+        request.getRequestDispatcher("/JSP/listCustomers.jsp").forward(request, response);
     }
 
     /**
