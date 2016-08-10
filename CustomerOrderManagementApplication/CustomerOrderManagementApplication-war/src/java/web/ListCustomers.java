@@ -69,7 +69,10 @@ public class ListCustomers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        List<Customer> customerList = customerFacade.findAll();
+        request.setAttribute("customerList", customerList);
+        request.getRequestDispatcher("/JSP/listCustomers.jsp").forward(request, response);
     }
 
     /**
@@ -84,9 +87,7 @@ public class ListCustomers extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Customer> customerList = customerFacade.findAll();
-        request.setAttribute("customerList", customerList);
-        request.getRequestDispatcher("/JSP/listCustomers.jsp").forward(request, response);
+
     }
 
     /**
