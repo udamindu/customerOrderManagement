@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "UpdateCustomerOrder", urlPatterns = {"/UpdateCustomerOrder"})
 public class UpdateCustomerOrder extends HttpServlet {
     @EJB
+    private CustomerFacade customerFacade;
+    @EJB
     private CustomerOrderFacade customerOrderFacade;
 
     /**
@@ -86,16 +88,17 @@ public class UpdateCustomerOrder extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        String id = request.getParameter("id");
+        String customerId = request.getParameter("customerId");
+        String orderId = request.getParameter("orderId");
         String dueDate = request.getParameter("dueDate");
         String comment = request.getParameter("comment");
         String amount = request.getParameter("amount");
         String message;
         CustomerOrder customerOrder;
         
-        if((id != null) && (dueDate != null) && (comment != null) && (amount != null)){
-            customerOrder = new CustomerOrder();
-            customerOrder.setId(Long.parseLong(id));
+        if((orderId != null) && (orderId != null) && (dueDate != null) && (comment != null) && (amount != null)){
+            customerOrder = customerOrderFacade.find(orderId);
+            customerOrder.setCustomer(customerFacade.find(Long.parseLong(customerId)));
             customerOrder.setDueDate(dueDate);
             customerOrder.setComment(comment);
             customerOrder.setAmount(Double.parseDouble(amount));
