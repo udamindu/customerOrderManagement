@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,8 +23,27 @@
             </div>
         </nav>
             
-        <div class="container-fluid"> 
-            
+        <div class="container-fluid table-responsive"> 
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Customer Id</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Contact No</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    <tr>
+                        <td>lol</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                    </tr>
+          
+                </tbody>
+            </table>
         </div>
         <script  type="text/javascript" src="JS/bootstrap.min.js"></script>
     </body>
