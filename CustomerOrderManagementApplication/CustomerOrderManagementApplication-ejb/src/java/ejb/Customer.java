@@ -5,10 +5,8 @@
 package ejb;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -19,10 +17,17 @@ public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private Long id;
     
+    @NotNull
     private String name;
+    
+    @NotNull
     private String address;
+    
+    @NotNull
+    @Column(name = "CONTACTNUMBER", length = 10)
     private String contactNumber;
 
     public String getAddress() {

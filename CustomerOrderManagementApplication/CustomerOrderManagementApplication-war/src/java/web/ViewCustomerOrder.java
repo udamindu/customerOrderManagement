@@ -69,6 +69,7 @@ public class ViewCustomerOrder extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        String customerId = request.getParameter("customerId");
         String orderId = request.getParameter("orderId");
         CustomerOrder customerOrder = customerOrderFacade.find(orderId);
         request.setAttribute("customerOrder", customerOrder);
