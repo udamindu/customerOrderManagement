@@ -22,23 +22,21 @@
             </div>
         </nav>
         
-        <div class="container cntnr-main"> 
-            <div class="row destacados">
+        <div class="container"> 
+            <div class="row">
 
                 <div class="col-md-6">
                     <div>
-                        <img src="IMG/customer-orders.jpg"alt="Texto Alternativo" class="img-circle img-thumbnail">
-                        <h3>Customer Orders/Order Lines</h3>
-                        <a href="/CustomerOrders-war/GetCustomerOrders" class="btn btn-primary btn-lg" >
-                            View Customer Orders >> </a>
+                        <h3>Customer Orders</h3>
+                        <a href="/CustomerOrderManagementApplication-war/ListCustomerOrder" class="btn btn-primary btn-lg" >
+                            View Customer Orders </a>
                     </div>
                 </div>
                     
                 <div class="col-md-6">  
                     <div>
-                        <img src="IMG/customers.jpg" class="img-circle img-thumbnail">
                         <h3>Customers</h3>
-                        <a href="/CustomerOrders-war/GetCustomers" class="btn btn-primary btn-lg" >View Customers >> </a>
+                        <a href="/CustomerOrderManagementApplication-war/ListCustomers" class="btn btn-primary btn-lg" >View Customers </a>
                     </div>
                 </div>
                     
