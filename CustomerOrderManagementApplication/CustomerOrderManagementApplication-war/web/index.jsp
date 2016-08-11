@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Customer Orders</title>
+        <title>Customer Order Management</title>
         
         <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
     </head>
