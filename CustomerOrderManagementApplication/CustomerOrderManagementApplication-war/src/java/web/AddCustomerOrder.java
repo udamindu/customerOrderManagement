@@ -6,8 +6,10 @@ package web;
 
 import ejb.CustomerFacade;
 import ejb.CustomerOrder;
+import ejb.CustomerOrderFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Set;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.jms.*;
@@ -17,6 +19,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 /**
  *
@@ -25,7 +31,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "AddCustomerOrder", urlPatterns = {"/AddCustomerOrder"})
 public class AddCustomerOrder extends HttpServlet {
     @EJB
-    private CustomerFacade customerFacade;
+    private CustomerOrderFacade customerOrderFacade;
+    
+    @EJB
+    private CustomerFacade customerFacade;  
     
     @Resource(mappedName="jms/NewCustomerOrderFactory")
     private ConnectionFactory connectionFactory;
@@ -95,13 +104,14 @@ public class AddCustomerOrder extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         String customerId = request.getParameter("customerId");
+        String orderId = request.getParameter("orderId");
         String dueDate = request.getParameter("dueDate");
         String comment = request.getParameter("comment");
         String amount = request.getParameter("amount");
         String statusMessage;
         
-        if((dueDate != null) && (comment != null) && (amount != null)){
-            try {
+        if((orderId != null) && (dueDate != null) && (comment != null) && (amount != null)){
+            try {                
                 Connection connection = connectionFactory.createConnection();
                 Session session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
                         
@@ -114,14 +124,27 @@ public class AddCustomerOrder extends HttpServlet {
                 customerOrder.setComment(comment);
                 customerOrder.setAmount(Double.parseDouble(amount));
                 customerOrder.setCustomer(customerFacade.find(Long.parseLong(customerId)));
-
-                message.setObject(customerOrder);
-                messageProducer.send(message);
-                messageProducer.close();
-                connection.close();
                 
-                statusMessage = "Order added succesfully";
-                request.setAttribute("message", statusMessage);
+                ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+                Validator validator = factory.getValidator();
+                Set<ConstraintViolation<CustomerOrder>> constraints = validator.validate(customerOrder);
+                String errors = "";
+                for (ConstraintViolation<CustomerOrder> constraint : constraints) {
+                        errors += constraint.getMessage();
+                }
+                
+                if(errors.isEmpty()) {
+                    message.setObject(customerOrder);
+                    messageProducer.send(message);
+                    messageProducer.close();
+                    connection.close();
+                    statusMessage = "Order will be added to the database";
+                    request.setAttribute("message", statusMessage);
+                }else{              
+                    statusMessage = "Errors detected, Try a different Order Id";
+                    request.setAttribute("message", statusMessage);
+                }           
+                
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomerOrders.jsp");
                 rd.forward(request, response);
 

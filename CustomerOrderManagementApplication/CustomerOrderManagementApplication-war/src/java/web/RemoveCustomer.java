@@ -85,12 +85,12 @@ public class RemoveCustomer extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        String id = request.getParameter("id");
+        String customerId = request.getParameter("customerId");
         String message;
         Customer customer;
         
-        if(id != null){
-            customer = customerFacade.find(Long.parseLong(id));
+        if(customerId != null){
+            customer = customerFacade.find(Long.parseLong(customerId));
             customerFacade.remove(customer);
             message = "Customer removed successfully!";
             request.setAttribute("message", message);
