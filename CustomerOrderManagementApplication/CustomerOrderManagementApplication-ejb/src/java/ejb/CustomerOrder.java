@@ -6,6 +6,7 @@ package ejb;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -15,12 +16,20 @@ import javax.persistence.*;
 public class CustomerOrder implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @NotNull
+    private String orderId;
     
+    @NotNull
     private String dueDate;
+    
+    @NotNull
     private String comment;
+    
+    @NotNull
     private double amount;
+    
+    @ManyToOne
+    private Customer customer;
 
     public double getAmount() {
         return amount;
@@ -53,22 +62,19 @@ public class CustomerOrder implements Serializable {
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
-    
-    @ManyToOne
-    private Customer customer;
 
-    public Long getId() {
-        return id;
+    public String getId() {
+        return orderId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(String orderId) {
+        this.orderId = orderId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (orderId != null ? orderId.hashCode() : 0);
         return hash;
     }
 
@@ -79,7 +85,7 @@ public class CustomerOrder implements Serializable {
             return false;
         }
         CustomerOrder other = (CustomerOrder) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.orderId == null && other.orderId != null) || (this.orderId != null && !this.orderId.equals(other.orderId))) {
             return false;
         }
         return true;
@@ -87,7 +93,7 @@ public class CustomerOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.CustomerOrder[ id=" + id + " ]";
+        return "ejb.CustomerOrder[ id=" + orderId + " ]";
     }
     
 }
