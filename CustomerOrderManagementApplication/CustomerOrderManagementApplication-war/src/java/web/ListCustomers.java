@@ -69,10 +69,13 @@ public class ListCustomers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
+        try{
         List<Customer> customerList = customerFacade.findAll();
         request.setAttribute("customerList", customerList);
         request.getRequestDispatcher("/JSP/listCustomers.jsp").forward(request, response);
+        }catch(Exception e){
+            throw new ServletException("Retrieving customers failed!", e);
+        }
     }
 
     /**
