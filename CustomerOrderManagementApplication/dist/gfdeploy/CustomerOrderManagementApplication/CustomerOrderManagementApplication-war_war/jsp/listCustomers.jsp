@@ -12,7 +12,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Customer List</title>
         
-        <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
+        <!--<link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -22,8 +25,13 @@
                 </div>
             </div>
         </nav>
+        
+        <div class="container-fluid">
+            <a class="btn btn-info btn-lg" href="/CustomerOrderManagementApplication-war"><span class="glyphicon glyphicon-home"></span> Home</a>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Customer</button>
+        </div>
             
-        <div class="container-fluid table-responsive"> 
+        <div class="container-fluid table-responsive">             
             <c:choose>
                 <c:when test="${empty customerList}">
                     <h4>No Customer data recorded</h4>
@@ -63,6 +71,42 @@
                 </c:otherwise>
             </c:choose>
         </div>
-        <script  type="text/javascript" src="JS/bootstrap.min.js"></script>
+        
+        <!-- Modal for adding new Customers -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+      
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Customers</h4>
+                    </div>
+                    <form id="customer-add-form" action="/CustomerOrderManagementApplication-war/AddCustomer" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="cname">Customer Name:</label>
+                            <input type="text" class="form-control" id="cname" name="cname" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="caddress">Customer Address:</label>
+                            <input type="text" class="form-control" id="caddress" name="caddress" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactno">Contact Number:</label>
+                            <input type="text" class="form-control" id="contactno" name="contactno" required/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btn-add-customer" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    </form>
+                </div>
+        
+            </div>
+        </div>
+        <!--<script  type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script  type="text/javascript" src="js/jquery-1.11.0.min.js"></script>-->
     </body>
 </html>
