@@ -69,10 +69,13 @@ public class ListCustomerOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
+        try{
         List<CustomerOrderEntity> customerOrderList = customerOrderFacade.findAll();
         request.setAttribute("customerOrderList", customerOrderList);
-        request.getRequestDispatcher("/JSP/listCustomerOrders.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/listCustomerOrders.jsp").forward(request, response);
+        }catch(Exception e){
+            throw new ServletException("Retrieving customers orders failed!", e);
+        }
     }
 
     /**
