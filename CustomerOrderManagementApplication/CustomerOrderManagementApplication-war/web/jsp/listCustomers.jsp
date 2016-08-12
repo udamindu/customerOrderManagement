@@ -25,7 +25,7 @@
             
         <div class="container-fluid table-responsive"> 
             <c:choose>
-                <c:when test="${empty customers}">
+                <c:when test="${empty customerList}">
                     <h4>No Customer data recorded</h4>
                 </c:when>
                 <c:otherwise>   
@@ -41,7 +41,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${customers}" var="element"> 
+                                <c:forEach items="${customerList}" var="element"> 
                                     <tr>
                                         <td> ${element.id} </td>                        
                                         <td> ${element.name} </td>  

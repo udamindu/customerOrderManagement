@@ -24,26 +24,44 @@
         </nav>
             
         <div class="container-fluid table-responsive"> 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Customer Id</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Contact No</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody> 
-                    <tr>
-                        <td>lol</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                    </tr>
-          
-                </tbody>
-            </table>
+            <c:choose>
+                <c:when test="${empty customerList}">
+                    <h4>No Customer data recorded</h4>
+                </c:when>
+                <c:otherwise>   
+                        <table class="table table-bordered"> 
+                            <thead>
+                                <tr>
+                                    <th>Customer ID</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Contact No.</th>  
+                                    <th>Actions </th>  
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${customerList}" var="element"> 
+                                    <tr>
+                                        <td> ${element.id} </td>                        
+                                        <td> ${element.name} </td>  
+                                        <td> ${element.address}  </td>                    
+                                        <td> ${element.contactNumber}  </td>   
+                                        <td>
+                                            <button name="btn-edit-customer" class="btn btn-primary"
+                                                    data-id="${element.id}" data-cname="${element.name}"
+                                                    data-caddress="${element.address}" data-contact-no="${element.contactNumber}" >
+                                                Update</button>
+                                        </td>       
+                                        <td>
+                                            <button name="btn-delete-customer" data-cid="${element.id}" class="btn btn-info">Delete</button>
+                                        </td>   
+                                    </tr>   
+                                </c:forEach>
+                            </tbody>
+                        </table>                   
+                </c:otherwise>
+            </c:choose>
         </div>
         <script  type="text/javascript" src="JS/bootstrap.min.js"></script>
     </body>
