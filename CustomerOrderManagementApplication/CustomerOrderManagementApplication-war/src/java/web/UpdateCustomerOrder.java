@@ -5,7 +5,7 @@
 package web;
 
 import ejb.CustomerFacade;
-import ejb.CustomerOrder;
+import ejb.CustomerOrderEntity;
 import ejb.CustomerOrderFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -94,7 +94,7 @@ public class UpdateCustomerOrder extends HttpServlet {
         String comment = request.getParameter("comment");
         String amount = request.getParameter("amount");
         String message;
-        CustomerOrder customerOrder;
+        CustomerOrderEntity customerOrder;
         
         if((orderId != null) && (orderId != null) && (dueDate != null) && (comment != null) && (amount != null)){
             customerOrder = customerOrderFacade.find(orderId);

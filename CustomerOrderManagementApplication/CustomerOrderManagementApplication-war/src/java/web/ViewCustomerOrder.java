@@ -4,7 +4,7 @@
  */
 package web;
 
-import ejb.CustomerOrder;
+import ejb.CustomerOrderEntity;
 import ejb.CustomerOrderFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -69,7 +69,7 @@ public class ViewCustomerOrder extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String orderId = request.getParameter("orderId");
-        CustomerOrder customerOrder = customerOrderFacade.find(orderId);
+        CustomerOrderEntity customerOrder = customerOrderFacade.find(orderId);
         request.setAttribute("customerOrder", customerOrder);
         request.getRequestDispatcher("/JSP/getCustomerOrder.jsp").forward(request, response);
     }

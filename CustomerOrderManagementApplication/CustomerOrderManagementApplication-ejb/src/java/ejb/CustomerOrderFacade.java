@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
  * @author Arunalu Hasakelum
  */
 @Stateless
-public class CustomerOrderFacade extends AbstractFacade<CustomerOrder> {
+public class CustomerOrderFacade extends AbstractFacade<CustomerOrderEntity> {
     @PersistenceContext(unitName = "CustomerOrderManagementApplication-ejbPU")
     private EntityManager em;
 
@@ -23,7 +23,7 @@ public class CustomerOrderFacade extends AbstractFacade<CustomerOrder> {
     }
 
     public CustomerOrderFacade() {
-        super(CustomerOrder.class);
+        super(CustomerOrderEntity.class);
     }
     
 }

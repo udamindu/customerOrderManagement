@@ -5,7 +5,7 @@
 package web;
 
 import ejb.CustomerFacade;
-import ejb.CustomerOrder;
+import ejb.CustomerOrderEntity;
 import ejb.CustomerOrderFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -118,8 +118,8 @@ public class AddCustomerOrder extends HttpServlet {
                 MessageProducer messageProducer = session.createProducer(queue);
 
                 ObjectMessage message = session.createObjectMessage();
-                // here we create CustomerOrder entity, that will be sent in JMS message
-                CustomerOrder customerOrder = new CustomerOrder();
+                // here we create CustomerOrderEntity entity, that will be sent in JMS message
+                CustomerOrderEntity customerOrder = new CustomerOrderEntity();
                 customerOrder.setDueDate(dueDate);
                 customerOrder.setComment(comment);
                 customerOrder.setAmount(Double.parseDouble(amount));
@@ -127,9 +127,9 @@ public class AddCustomerOrder extends HttpServlet {
                 
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
-                Set<ConstraintViolation<CustomerOrder>> constraints = validator.validate(customerOrder);
+                Set<ConstraintViolation<CustomerOrderEntity>> constraints = validator.validate(customerOrder);
                 String errors = "";
-                for (ConstraintViolation<CustomerOrder> constraint : constraints) {
+                for (ConstraintViolation<CustomerOrderEntity> constraint : constraints) {
                         errors += constraint.getMessage();
                 }
                 

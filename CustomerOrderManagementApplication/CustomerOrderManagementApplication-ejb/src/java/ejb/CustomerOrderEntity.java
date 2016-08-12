@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
  * @author Arunalu Hasakelum
  */
 @Entity
-public class CustomerOrder implements Serializable {
+public class CustomerOrderEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @NotNull
@@ -81,10 +81,10 @@ public class CustomerOrder implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CustomerOrder)) {
+        if (!(object instanceof CustomerOrderEntity)) {
             return false;
         }
-        CustomerOrder other = (CustomerOrder) object;
+        CustomerOrderEntity other = (CustomerOrderEntity) object;
         if ((this.orderId == null && other.orderId != null) || (this.orderId != null && !this.orderId.equals(other.orderId))) {
             return false;
         }

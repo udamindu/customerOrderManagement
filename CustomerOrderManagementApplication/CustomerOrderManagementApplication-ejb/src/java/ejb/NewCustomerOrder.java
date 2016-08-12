@@ -39,7 +39,7 @@ public class NewCustomerOrder implements MessageListener {
         try {
             if (message instanceof ObjectMessage) {
                 msg = (ObjectMessage) message;
-                CustomerOrder e = (CustomerOrder) msg.getObject();
+                CustomerOrderEntity e = (CustomerOrderEntity) msg.getObject();
                 save(e);
             }
         } catch (JMSException e) {

@@ -4,7 +4,7 @@
  */
 package web;
 
-import ejb.CustomerOrder;
+import ejb.CustomerOrderEntity;
 import ejb.CustomerOrderFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -70,7 +70,7 @@ public class ListCustomerOrder extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        List<CustomerOrder> customerOrderList = customerOrderFacade.findAll();
+        List<CustomerOrderEntity> customerOrderList = customerOrderFacade.findAll();
         request.setAttribute("customerOrderList", customerOrderList);
         request.getRequestDispatcher("/JSP/listCustomerOrders.jsp").forward(request, response);
     }
