@@ -14,6 +14,7 @@
         
         <!--<link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css"> -->
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script type="text/javascript" src="js/customerApp.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
@@ -84,12 +85,12 @@
                                         <td> ${element.address}  </td>                    
                                         <td> ${element.contactNumber}  </td>   
                                         <td>
-                                            <button name="btn-edit-customer" class="btn btn-default btn-sm"
-                                                    data-id="${element.id}" data-cname="${element.name}"
-                                                    data-caddress="${element.address}" data-contact-no="${element.contactNumber}">
+                                            <button name="editCustomer" class="btn btn-default btn-sm"
+                                                    data-cid="${element.id}" data-cname="${element.name}"
+                                                    data-caddress="${element.address}" data-contactNo="${element.contactNumber}">
                                                 <span class="glyphicon glyphicon-edit"></span>Update
                                             </button>
-                                            <button name="btn-delete-customer" data-cid="${element.id}" class="btn btn-danger btn-sm">
+                                            <button name="deleteCustomer" data-cid="${element.id}" class="btn btn-danger btn-sm">
                                                 <span class="glyphicon glyphicon-trash"></span>Remove
                                             </button>
                                         </td>   
@@ -127,8 +128,43 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id="btn-add-customer" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    </form>
+                </div>
+        
+            </div>
+        </div>
+        
+        <!-- Modal for adding editing Customers -->
+        <div id="editModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+      
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">View &amp; Edit Customers</h4>
+                    </div>
+                    <form id="customer-add-form" action="/CustomerOrderManagementApplication-war/EditCustomer" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="cname">Customer Name:</label>
+                            <input type="text" class="form-control" name="cname" autofocus required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="caddress">Customer Address:</label>
+                            <input type="text" class="form-control" name="caddress" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactno">Contact Number:</label>
+                            <input type="tel" pattern="^\d{10}$" class="form-control" placeholder="Contact Number (format: 0123456789)" name="contactno" required/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btn-add-customer" class="btn btn-primary">Add</button>
+                        <button type="reset" class="btn btn-default">Reset</button>
                     </div>
                     </form>
                 </div>

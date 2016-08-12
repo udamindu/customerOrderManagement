@@ -85,7 +85,7 @@ public class RemoveCustomer extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        String customerId = request.getParameter("customerId");
+        String customerId = request.getParameter("id");
         String message;
         CustomerEntity customer;
         
