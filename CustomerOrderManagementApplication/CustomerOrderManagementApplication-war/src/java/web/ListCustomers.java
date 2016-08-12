@@ -72,6 +72,7 @@ public class ListCustomers extends HttpServlet {
         try{
         List<CustomerEntity> customerList = customerFacade.findAll();
         request.setAttribute("customerList", customerList);
+        System.out.println("Helloooooooooooooooooooo");
         request.getRequestDispatcher("/JSP/listCustomers.jsp").forward(request, response);
         }catch(Exception e){
             throw new ServletException("Retrieving customers failed!", e);
