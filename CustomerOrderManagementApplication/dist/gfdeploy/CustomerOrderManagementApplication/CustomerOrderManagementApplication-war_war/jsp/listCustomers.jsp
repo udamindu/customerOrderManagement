@@ -27,7 +27,19 @@
         </nav>
         
         <div class="container-fluid">
-            <a class="btn btn-info btn-lg" href="/CustomerOrderManagementApplication-war"><span class="glyphicon glyphicon-home"></span> Home</a>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a class="btn btn-default btn-sm" href="/CustomerOrderManagementApplication-war"><span class="glyphicon glyphicon-home"></span> Home</a>
+                        </li>
+                        <li class="active">
+                            <span class="glyphicon glyphicon-user"></span>View Customers
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Customer</button>
         </div>
             
@@ -86,15 +98,15 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="cname">Customer Name:</label>
-                            <input type="text" class="form-control" id="cname" name="cname" required/>
+                            <input type="text" class="form-control" name="cname" autofocus required/>
                         </div>
                         <div class="form-group">
                             <label for="caddress">Customer Address:</label>
-                            <input type="text" class="form-control" id="caddress" name="caddress" required/>
+                            <input type="text" class="form-control" name="caddress" required/>
                         </div>
                         <div class="form-group">
                             <label for="contactno">Contact Number:</label>
-                            <input type="text" class="form-control" id="contactno" name="contactno" required/>
+                            <input type="tel" pattern="^\d{3}-\d{7}$" class="form-control" placeholder="Contact Number (format: xxx-xxxxxxx)" name="contactno" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
