@@ -85,9 +85,9 @@ public class AddCustomer extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        String name = request.getParameter("name");
-        String address = request.getParameter("address");
-        String contact = request.getParameter("contact");
+        String name = request.getParameter("cname");
+        String address = request.getParameter("caddress");
+        String contact = request.getParameter("contactno");
         String message;
         CustomerEntity customer;
         
@@ -99,14 +99,12 @@ public class AddCustomer extends HttpServlet {
             customerFacade.create(customer);
             message = "Customer added successfully!";
             request.setAttribute("messageSuccess", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomers.jsp");
-            rd.forward(request, response);
+            response.sendRedirect("ListCustomers");
         }
         else{
             message = "Failed to add, try filling all fields!";
             request.setAttribute("messageFailure", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomers.jsp");
-            rd.forward(request, response);
+            response.sendRedirect("ListCustomers");
         }
     }
 

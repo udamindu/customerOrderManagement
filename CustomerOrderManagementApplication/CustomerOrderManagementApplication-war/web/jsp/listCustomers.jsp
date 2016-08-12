@@ -44,12 +44,19 @@
         </div>
         
         <div class="container-fluid">
-            <c:if test="${not empty confirmation}">
+            <c:if test="${not empty messageSuccess}">
                 <div class="alert alert-success">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    ${confirmation}
+                    ${messageSuccess}
                 </div>
-                <c:remove var="confirmation" scope="session" /> 
+                <c:remove var="messageSuccess" scope="request" /> 
+            </c:if>
+            <c:if test="${not empty messageFailure}">
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    ${messageFailure}
+                </div>
+                <c:remove var="messageFailure" scope="request" /> 
             </c:if>
         </div>
             
@@ -66,7 +73,7 @@
                                     <th>Name</th>
                                     <th>Address</th>
                                     <th>Contact No.</th>  
-                                    <th>Actions </th>  
+                                    <th></th>  
                                     <th></th>
                                 </tr>
                             </thead>
@@ -116,7 +123,7 @@
                         </div>
                         <div class="form-group">
                             <label for="contactno">Contact Number:</label>
-                            <input type="tel" pattern="^\d{3}-\d{7}$" class="form-control" placeholder="Contact Number (format: xxx-xxxxxxx)" name="contactno" required/>
+                            <input type="tel" pattern="^\d{10}$" class="form-control" placeholder="Contact Number (format: 0123456789)" name="contactno" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
