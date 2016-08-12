@@ -4,7 +4,7 @@
  */
 package web;
 
-import ejb.Customer;
+import ejb.CustomerEntity;
 import ejb.CustomerFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -90,7 +90,7 @@ public class EditCustomer extends HttpServlet {
         String address = request.getParameter("address");
         String contact = request.getParameter("contact");
         String message;
-        Customer customer;
+        CustomerEntity customer;
         
         if((id != null) && (name != null) && (address != null) && (contact != null)){
             customer = customerFacade.find(Long.parseLong(id));

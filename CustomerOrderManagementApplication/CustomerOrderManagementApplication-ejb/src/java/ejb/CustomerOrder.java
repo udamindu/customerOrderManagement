@@ -29,7 +29,7 @@ public class CustomerOrder implements Serializable {
     private double amount;
     
     @ManyToOne
-    private Customer customer;
+    private CustomerEntity customer;
 
     public double getAmount() {
         return amount;
@@ -47,11 +47,11 @@ public class CustomerOrder implements Serializable {
         this.comment = comment;
     }
 
-    public Customer getCustomer() {
+    public CustomerEntity getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(CustomerEntity customer) {
         this.customer = customer;
     }
 

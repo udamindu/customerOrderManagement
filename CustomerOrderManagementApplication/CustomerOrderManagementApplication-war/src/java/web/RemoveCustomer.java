@@ -4,7 +4,7 @@
  */
 package web;
 
-import ejb.Customer;
+import ejb.CustomerEntity;
 import ejb.CustomerFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -87,7 +87,7 @@ public class RemoveCustomer extends HttpServlet {
         //processRequest(request, response);
         String customerId = request.getParameter("customerId");
         String message;
-        Customer customer;
+        CustomerEntity customer;
         
         if(customerId != null){
             customer = customerFacade.find(Long.parseLong(customerId));

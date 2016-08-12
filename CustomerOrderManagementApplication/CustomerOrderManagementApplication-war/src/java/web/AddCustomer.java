@@ -4,7 +4,7 @@
  */
 package web;
 
-import ejb.Customer;
+import ejb.CustomerEntity;
 import ejb.CustomerFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -89,10 +89,10 @@ public class AddCustomer extends HttpServlet {
         String address = request.getParameter("address");
         String contact = request.getParameter("contact");
         String message;
-        Customer customer;
+        CustomerEntity customer;
         
         if((name != null) && (address != null) && (contact != null)){
-            customer = new Customer();
+            customer = new CustomerEntity();
             customer.setName(name);
             customer.setAddress(address);
             customer.setContactNumber(contact);

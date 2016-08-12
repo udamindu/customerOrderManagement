@@ -14,7 +14,7 @@ import javax.persistence.Query;
  * @author Arunalu Hasakelum
  */
 @Stateless
-public class CustomerFacade extends AbstractFacade<Customer> {
+public class CustomerFacade extends AbstractFacade<CustomerEntity> {
     @PersistenceContext(unitName = "CustomerOrderManagementApplication-ejbPU")
     private EntityManager em;
 
@@ -24,7 +24,7 @@ public class CustomerFacade extends AbstractFacade<Customer> {
     }
 
     public CustomerFacade() {
-        super(Customer.class);
+        super(CustomerEntity.class);
     }
     
 }
