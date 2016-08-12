@@ -93,15 +93,13 @@ public class RemoveCustomer extends HttpServlet {
             customer = customerFacade.find(Long.parseLong(customerId));
             customerFacade.remove(customer);
             message = "Customer removed successfully!";
-            request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomers.jsp");
-            rd.forward(request, response);
+            request.setAttribute("messageSuccess", message);
+	    response.sendRedirect("ListCustomers");
         }
         else{
             message = "Failed to remove the customer";
-            request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomers.jsp");
-            rd.forward(request, response);
+            request.setAttribute("messageFailure", message);
+	    response.sendRedirect("ListCustomers");
         }
     }
 

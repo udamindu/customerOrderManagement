@@ -74,7 +74,6 @@
                                     <th>Address</th>
                                     <th>Contact No.</th>  
                                     <th></th>  
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -85,13 +84,14 @@
                                         <td> ${element.address}  </td>                    
                                         <td> ${element.contactNumber}  </td>   
                                         <td>
-                                            <button name="btn-edit-customer" class="btn btn-primary"
+                                            <button name="btn-edit-customer" class="btn btn-default btn-sm"
                                                     data-id="${element.id}" data-cname="${element.name}"
-                                                    data-caddress="${element.address}" data-contact-no="${element.contactNumber}" >
-                                                Update</button>
-                                        </td>       
-                                        <td>
-                                            <button name="btn-delete-customer" data-cid="${element.id}" class="btn btn-info">Delete</button>
+                                                    data-caddress="${element.address}" data-contact-no="${element.contactNumber}">
+                                                <span class="glyphicon glyphicon-edit"></span>Update
+                                            </button>
+                                            <button name="btn-delete-customer" data-cid="${element.id}" class="btn btn-danger btn-sm">
+                                                <span class="glyphicon glyphicon-trash"></span>Remove
+                                            </button>
                                         </td>   
                                     </tr>   
                                 </c:forEach>
