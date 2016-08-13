@@ -63,11 +63,11 @@ public class CustomerOrderEntity implements Serializable {
         this.dueDate = dueDate;
     }
 
-    public String getId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setId(String orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
