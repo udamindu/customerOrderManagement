@@ -17,15 +17,6 @@
         <script type="text/javascript" src="js/customerApp.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script>
-            
-            $('#deleteCustomer').click(function(){
-                var id = $(this).data("cid");
-                $.post( "RemoveCustomer",{id:id}, function() {
-                    window.location.href='ListCustomers';
-                });
-            });
-        </script>
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -98,11 +89,9 @@
                                                     data-cid="${element.id}" data-cname="${element.name}"
                                                     data-caddress="${element.address}" data-contactNo="${element.contactNumber}">
                                                 <span class="glyphicon glyphicon-edit"></span>Update
-                                            </button>
-                                                    <button name="deleteCustomer" data-cid="${element.id}" class="btn btn-danger btn-sm" id="deleteCustomer">
+                                            <a type="button" class="btn btn-danger btn-sm" href=RemoveCustomer?id=${element.id}>
                                                 <span class="glyphicon glyphicon-trash"></span>Remove
-                                            </button>
-                                            <a href=RemoveCustomer?id=${element.id}> delete </a>    
+                                            </a>    
                                         </td>   
                                     </tr>   
                                 </c:forEach>
