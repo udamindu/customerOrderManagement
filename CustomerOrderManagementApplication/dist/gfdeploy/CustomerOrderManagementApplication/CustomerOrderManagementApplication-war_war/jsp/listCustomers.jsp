@@ -59,14 +59,14 @@
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     ${messageSuccess}
                 </div>
-                <c:remove var="messageSuccess" scope="request" /> 
+                <c:remove var="messageSuccess" scope="session" /> 
             </c:if>
             <c:if test="${not empty messageFailure}">
                 <div class="alert alert-danger">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     ${messageFailure}
                 </div>
-                <c:remove var="messageFailure" scope="request" /> 
+                <c:remove var="messageFailure" scope="session" /> 
             </c:if>
         </div>
             
