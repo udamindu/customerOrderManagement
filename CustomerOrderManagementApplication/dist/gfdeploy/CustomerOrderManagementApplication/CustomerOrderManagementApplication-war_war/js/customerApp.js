@@ -8,8 +8,6 @@ $(document).ready(function () {
         var cname = $(this).data("cname");
         var caddress = $(this).data("caddress");
         var contactNo = $(this).data("ccontact");
-        alert(contactNo);
-        alert(cname);
    
         $('#mcid').val(id);
         $('#mcname').val(cname);
