@@ -17,10 +17,3 @@ $('[name="editCustomer"]').click(function(){
    $('#editModal').modal('show');
 });
 
-$('#deleteCustomer').click(function(){
-        var id = $(this).data("cid");
-        $.post( "RemoveCustomer",{id:id}, function() {
-            window.location.href='ListCustomers';
-          });
-});
-
