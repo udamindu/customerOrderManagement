@@ -85,10 +85,10 @@ public class EditCustomer extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        String id = request.getParameter("id");
-        String name = request.getParameter("name");
-        String address = request.getParameter("address");
-        String contact = request.getParameter("contact");
+        String id = request.getParameter("mcid");
+        String name = request.getParameter("mcname");
+        String address = request.getParameter("caddress");
+        String contact = request.getParameter("mcontactno");
         String message;
         CustomerEntity customer;
         

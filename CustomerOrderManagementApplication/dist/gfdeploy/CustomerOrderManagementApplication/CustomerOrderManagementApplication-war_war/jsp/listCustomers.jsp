@@ -14,9 +14,9 @@
         
         <!--<link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css"> -->
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script type="text/javascript" src="js/customerApp.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/customerApp.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -67,7 +67,7 @@
                     <h4>No Customer data recorded</h4>
                 </c:when>
                 <c:otherwise>   
-                        <table class="table table-bordered"> 
+                        <table class="table table-striped table-hover"> 
                             <thead>
                                 <tr>
                                     <th>Customer ID</th>
@@ -87,7 +87,7 @@
                                         <td>
                                             <button name="editCustomer" class="btn btn-default btn-sm"
                                                     data-cid="${element.id}" data-cname="${element.name}"
-                                                    data-caddress="${element.address}" data-contactNo="${element.contactNumber}">
+                                                    data-caddress="${element.address}" data-ccontact="${element.contactNumber}">
                                                 <span class="glyphicon glyphicon-edit"></span>Update
                                             </button>    
                                             <a type="button" class="btn btn-danger btn-sm" href=RemoveCustomer?id=${element.id}>
@@ -137,7 +137,7 @@
             </div>
         </div>
         
-        <!-- Modal for adding editing Customers -->
+        <!-- Modal for viewing/editing Customers -->
         <div id="editModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
       
@@ -150,20 +150,24 @@
                     <form id="customer-add-form" action="/CustomerOrderManagementApplication-war/EditCustomer" method="post">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="cname">Customer Name:</label>
-                            <input type="text" class="form-control" name="cname" autofocus required/>
+                            <label for="mcid">Customer Id:</label>
+                            <input type="text" class="form-control" id="mcid" name="mcid"/>
                         </div>
                         <div class="form-group">
-                            <label for="caddress">Customer Address:</label>
-                            <input type="text" class="form-control" name="caddress" required/>
+                            <label for="mcname">Customer Name:</label>
+                            <input type="text" class="form-control" id="mcname" name="mcname" required/>
                         </div>
                         <div class="form-group">
-                            <label for="contactno">Contact Number:</label>
-                            <input type="tel" pattern="^\d{10}$" class="form-control" placeholder="Contact Number (format: 0123456789)" name="contactno" required/>
+                            <label for="mcaddress">Customer Address:</label>
+                            <input type="text" class="form-control" name="caddress" id="mcaddress" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="mcontactno">Contact Number:</label>
+                            <input type="number" pattern="^\d{10}$" class="form-control" id="mcontactno" name="mcontactno" placeholder="Contact Number (format: 0123456789)" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id="btn-add-customer" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                         <button type="reset" class="btn btn-default">Reset</button>
                     </div>
                     </form>

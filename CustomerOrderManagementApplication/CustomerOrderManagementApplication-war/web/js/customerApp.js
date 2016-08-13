@@ -2,18 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
-$('[name="editCustomer"]').click(function(){
-   var id = $(this).data("cid");
-   var cname = $(this).data("cname");
-   var caddress = $(this).data("caddress");
-   var contactNo = $(this).data("contactNo");
+$(document).ready(function () {
+    $('[name="editCustomer"]').click(function(){
+        var id = $(this).data("cid");
+        var cname = $(this).data("cname");
+        var caddress = $(this).data("caddress");
+        var contactNo = $(this).data("ccontact");
+        alert(contactNo);
+        alert(cname);
    
-   $('#cid').val(id);
-   $('#cname').val(cname);
-   $('#caddress').val(caddress);
-   $('#contactNo').val(contactNo);
-   $('#cid').prop("readonly", true);
-   $('#editModal').modal('show');
+        $('#mcid').val(id);
+        $('#mcname').val(cname);
+        $('#mcaddress').val(caddress);
+        $('#mcontactno').val(contactNo);
+        $('#mcid').prop("readonly", true);
+        $('#editModal').modal('show');
+    });
 });
 
