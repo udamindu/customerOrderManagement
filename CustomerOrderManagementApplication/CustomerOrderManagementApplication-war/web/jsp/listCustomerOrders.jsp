@@ -12,7 +12,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Customer Order List</title>
         
-        <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
+        <!--<link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">-->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/customerOrderApp.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -22,40 +26,77 @@
                 </div>
             </div>
         </nav>
+        
+        <!-- breadcrumb -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a class="btn btn-default btn-sm" href="/CustomerOrderManagementApplication-war"><span class="glyphicon glyphicon-home"></span> Home</a>
+                        </li>
+                        <li class="active">
+                            <span class="glyphicon glyphicon-user"></span>View Customer Orders
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Customer Order</button>
+        </div>
+        
+        <!-- status message div -->
+        <div class="container-fluid">
+            <c:if test="${not empty messageSuccess}">
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    ${messageSuccess}
+                </div>
+                <c:remove var="messageSuccess" scope="session" /> 
+            </c:if>
+            <c:if test="${not empty messageFailure}">
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    ${messageFailure}
+                </div>
+                <c:remove var="messageFailure" scope="session" /> 
+            </c:if>
+        </div>
             
         <div class="container-fluid"> 
             <c:choose>
                 <c:when test="${empty customerOrderList}">
-                    <h4>No Customer Order data recorded</h4>
+                    <h4>Sorry, No Customer Order data recorded</h4>
                 </c:when>
                 <c:otherwise>   
                     <table class="table table-bordered"> 
                         <thead>
                             <tr>
+                                <th>Order No</th>
                                 <th>Customer ID</th>
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Contact No.</th>  
-                                <th>Actions </th>  
+                                <th>Customer Name</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>  
+                                <th>Comments</th>  
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach items="${customerOrderList}" var="element"> 
                                 <tr>
-                                    <td> ${element.id} </td>                        
-                                    <td> ${element.name} </td>  
-                                    <td> ${element.address}  </td>                    
-                                    <td> ${element.contactNumber}  </td>   
+                                    <td> ${element.orderId} </td>                        
+                                    <td> ${element.customer.id} </td>  
+                                    <td> ${element.customer.name}  </td>                    
+                                    <td> ${element.amount}  </td>
+                                    <td> ${element.dueDate}  </td> 
+                                    <td> ${element.comment}  </td> 
                                     <td>
-                                        <button name="btn-edit-customer" class="btn btn-primary"
-                                                data-id="${element.id}" data-cname="${element.name}"
-                                                data-caddress="${element.address}" data-contact-no="${element.contactNumber}" >
-                                            Update</button>
-                                    </td>       
-                                    <td>
-                                        <button name="btn-delete-customer" data-cid="${element.id}" class="btn btn-info">Delete</button>
-                                    </td>   
+                                        <button name="editCustomerOrder" class="btn btn-default btn-sm"
+                                                data-oid="${element.orderId}" data-ocid="${element.customer.id}"
+                                                data-ocname="${element.customer.name}" data-oamount="${element.amount}"
+                                                data-oduedate="${element.dueDate}" data-ocomment="${element.comment}">
+                                            <span class="glyphicon glyphicon-edit"></span>View and Update
+                                        </button>
+                                    </td>         
                                 </tr>   
                             </c:forEach>
                         </tbody>
@@ -63,6 +104,53 @@
                 </c:otherwise>
             </c:choose>    
         </div>
-        <script  type="text/javascript" src="JS/bootstrap.min.js"></script>
+        
+        <!-- Modal for adding new Customer Orders -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Customer Order</h4>
+                    </div>
+                    <form id="customer-add-form" action="/CustomerOrderManagementApplication-war/AddCustomerOrder" method="post">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="orderId">Order No:</label>
+                                <input type="text" class="form-control" name="orderId" autofocus required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerId">Customer Id:</label>
+                                <select class="form-control" name="customerId" id="customerId" required>
+                                    <!--<c:forEach items="${customerOrderList.customer}" var="customerElement">
+                                        <option>${customerElement.id}</option>
+                                    </c:forEach>-->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Amount:</label>
+                                <input type="number" class="form-control" name="amount" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="dueDate">Due Date:</label>
+                                <input type="date" class="form-control" name="dueDate" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Comment:</label>
+                                <textarea rows="4" cols="" class="form-control" name="comment" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+                    
+            </div>
+        </div>
+        <!--<script  type="text/javascript" src="JS/bootstrap.min.js"></script>-->
     </body>
 </html>
