@@ -90,9 +90,10 @@
                                                     data-caddress="${element.address}" data-contactNo="${element.contactNumber}">
                                                 <span class="glyphicon glyphicon-edit"></span>Update
                                             </button>
-                                            <button name="deleteCustomer" data-cid="${element.id}" class="btn btn-danger btn-sm">
+                                                    <button name="deleteCustomer" data-cid="${element.id}" class="btn btn-danger btn-sm" id="deleteCustomer">
                                                 <span class="glyphicon glyphicon-trash"></span>Remove
                                             </button>
+                                            <a href=RemoveCustomer?id=${element.id}> delete </a>    
                                         </td>   
                                     </tr>   
                                 </c:forEach>

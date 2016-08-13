@@ -3,31 +3,24 @@
  * and open the template in the editor.
  */
 
-$('[name="btn-edit-customer"]').click(function(){
-   var id = $(this).data("id");
+$('[name="editCustomer"]').click(function(){
+   var id = $(this).data("cid");
    var cname = $(this).data("cname");
    var caddress = $(this).data("caddress");
-   var contactNo = $(this).data("contact-no");
+   var contactNo = $(this).data("contactNo");
    
    $('#cid').val(id);
    $('#cname').val(cname);
    $('#caddress').val(caddress);
-   $('#contact-no').val(contactNo);
-   hideFormAdd();
+   $('#contactNo').val(contactNo);
    $('#cid').prop("readonly", true);
-   $('#myModal').modal('show');
+   $('#editModal').modal('show');
 });
 
-$('[name="btn-delete-customer"]').click(function(){
-    var r = confirm("Do you want to delete this customer? ");
-    if (r == true) {
+$('#deleteCustomer').click(function(){
         var id = $(this).data("cid");
         $.post( "RemoveCustomer",{id:id}, function() {
-            window.location.href='GetCustomers';
+            window.location.href='ListCustomers';
           });
-    } else {
-        
-    }
-
 });
 
