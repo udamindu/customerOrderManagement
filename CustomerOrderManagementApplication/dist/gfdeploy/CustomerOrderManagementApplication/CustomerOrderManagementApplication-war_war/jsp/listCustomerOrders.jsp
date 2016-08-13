@@ -151,6 +151,45 @@
                     
             </div>
         </div>
+        
+        <!-- Modal for viewing/editing Customer Orders-->
+        <div id="editModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">View &amp; Edit Customers</h4>
+                    </div>
+                    <form id="customer-add-form" action="/CustomerOrderManagementApplication-war/EditCustomer" method="post">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="orderId">Order Id:</label>
+                                <input type="text" class="form-control" id="orderId" name="orderId"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerId">Customer Id:</label>
+                                <input type="text" class="form-control" id="customerId" name="customerId" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="mcaddress">Customer Address:</label>
+                                <input type="text" class="form-control" name="caddress" id="mcaddress" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="mcontactno">Contact Number:</label>
+                                <input type="number" pattern="^\d{10}$" class="form-control" id="mcontactno" name="mcontactno" placeholder="Contact Number (format: 0123456789)" required/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        </div>
+                    </form>
+                </div>
+                    
+            </div>
+        </div>
         <!--<script  type="text/javascript" src="JS/bootstrap.min.js"></script>-->
     </body>
 </html>

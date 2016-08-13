@@ -151,6 +151,53 @@
                     
             </div>
         </div>
+        
+        <!-- Modal for viewing/editing Customer Orders-->
+        <div id="editCusOrderModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">View &amp; Edit Customers</h4>
+                    </div>
+                    <form id="customer-add-form" action="/CustomerOrderManagementApplication-war/EditCustomer" method="post">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="orderId">Order No:</label>
+                                <input type="text" class="form-control" id="orderId" name="orderId"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerId">Customer Id:</label>
+                                <input type="text" class="form-control" id="customerId" name="customerId" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerName">Customer Name:</label>
+                                <input type="text" class="form-control" name="customerName" id="customerName" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="orderAmount">Order Amount:</label>
+                                <input type="number" class="form-control" id="orderAmount" name="orderAmount" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="orderDueDate">Due Date:</label>
+                                <input type="date" class="form-control" name="orderDueDate" id="orderDueDate" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="orderComment">Comment:</label>
+                                <textarea rows="4" cols="" class="form-control" name="orderComment" id="orderComment" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        </div>
+                    </form>
+                </div>
+                    
+            </div>
+        </div>
         <!--<script  type="text/javascript" src="JS/bootstrap.min.js"></script>-->
     </body>
 </html>

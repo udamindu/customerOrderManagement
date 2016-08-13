@@ -126,6 +126,8 @@ public class AddCustomerOrder extends HttpServlet {
                 customerOrder.setAmount(Double.parseDouble(amount));
                 customerOrder.setCustomer(customerFacade.find(Long.parseLong(customerId)));
                 
+                System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
                 Set<ConstraintViolation<CustomerOrderEntity>> constraints = validator.validate(customerOrder);

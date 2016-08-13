@@ -16,5 +16,20 @@ $(document).ready(function () {
         $('#mcid').prop("readonly", true);
         $('#editModal').modal('show');
     });
+    
+    $('[name="editCustomerOrder"]').click(function(){
+        var orderid = $(this).data("oid");
+        var customerid = $(this).data("ocid");
+        var customername = $(this).data("ocname");
+        var orderamount = $(this).data("oamount");
+        var orderamount = $(this).data("oamount");
+   
+        $('#mcid').val(id);
+        $('#mcname').val(cname);
+        $('#mcaddress').val(caddress);
+        $('#mcontactno').val(contactNo);
+        $('#mcid').prop("readonly", true);
+        $('#editModal').modal('show');
+    });
 });
 
