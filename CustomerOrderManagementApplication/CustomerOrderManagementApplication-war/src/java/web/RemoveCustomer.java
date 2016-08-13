@@ -77,12 +77,12 @@ public class RemoveCustomer extends HttpServlet {
             customer = customerFacade.find(Long.parseLong(customerId));
             customerFacade.remove(customer);
             message = "Customer removed successfully!";
-            request.setAttribute("messageSuccess", message);
+            request.getSession().setAttribute("messageSuccess", message);
 	    response.sendRedirect("ListCustomers");
         }
         else{
             message = "Failed to remove the customer";
-            request.setAttribute("messageFailure", message);
+            request.getSession().setAttribute("messageFailure", message);
 	    response.sendRedirect("ListCustomers");
         }
     }
