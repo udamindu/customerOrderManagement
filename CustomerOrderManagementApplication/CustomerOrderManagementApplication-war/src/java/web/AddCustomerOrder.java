@@ -120,6 +120,7 @@ public class AddCustomerOrder extends HttpServlet {
                 ObjectMessage message = session.createObjectMessage();
                 // here we create CustomerOrderEntity entity, that will be sent in JMS message
                 CustomerOrderEntity customerOrder = new CustomerOrderEntity();
+                customerOrder.setId(orderId);
                 customerOrder.setDueDate(dueDate);
                 customerOrder.setComment(comment);
                 customerOrder.setAmount(Double.parseDouble(amount));
