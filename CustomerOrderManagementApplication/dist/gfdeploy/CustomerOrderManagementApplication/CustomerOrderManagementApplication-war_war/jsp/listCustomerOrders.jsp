@@ -124,9 +124,9 @@
                             <div class="form-group">
                                 <label for="customerId">Customer Id:</label>
                                 <select class="form-control" name="customerId" id="customerId" required>
-                                    <!--<c:forEach items="${customerOrderList.customer}" var="customerElement">
-                                        <option>${customerElement.id}</option>
-                                    </c:forEach>-->
+                                    <c:forEach items="${customerOrderList}" var="customerElement">
+                                        <option>${customerElement.customer.id}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <div class="form-group">
