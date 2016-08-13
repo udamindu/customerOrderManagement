@@ -4,6 +4,8 @@
  */
 package web;
 
+import ejb.CustomerEntity;
+import ejb.CustomerFacade;
 import ejb.CustomerOrderEntity;
 import ejb.CustomerOrderFacade;
 import java.io.IOException;
@@ -22,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ListCustomerOrder", urlPatterns = {"/ListCustomerOrder"})
 public class ListCustomerOrder extends HttpServlet {
+    @EJB
+    private CustomerFacade customerFacade;
     @EJB
     private CustomerOrderFacade customerOrderFacade;
 
@@ -71,6 +75,8 @@ public class ListCustomerOrder extends HttpServlet {
             throws ServletException, IOException {
         try{
         List<CustomerOrderEntity> customerOrderList = customerOrderFacade.findAll();
+        List<CustomerEntity> customerList = customerFacade.findAll();
+        request.setAttribute("customerList", customerList);
         request.setAttribute("customerOrderList", customerOrderList);
         request.getRequestDispatcher("/jsp/listCustomerOrders.jsp").forward(request, response);
         }catch(Exception e){
