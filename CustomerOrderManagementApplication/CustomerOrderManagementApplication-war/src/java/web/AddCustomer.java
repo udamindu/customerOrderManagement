@@ -98,12 +98,12 @@ public class AddCustomer extends HttpServlet {
             customer.setContactNumber(contact);
             customerFacade.create(customer);
             message = "Customer added successfully!";
-            request.setAttribute("messageSuccess", message);
+            request.getSession().setAttribute("messageSuccess", message);
             response.sendRedirect("ListCustomers");
         }
         else{
             message = "Failed to add, try filling all fields!";
-            request.setAttribute("messageFailure", message);
+            request.getSession().setAttribute("messageFailure", message);
             response.sendRedirect("ListCustomers");
         }
     }
