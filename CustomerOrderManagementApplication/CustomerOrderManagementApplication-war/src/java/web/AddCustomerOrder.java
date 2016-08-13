@@ -139,14 +139,13 @@ public class AddCustomerOrder extends HttpServlet {
                     messageProducer.close();
                     connection.close();
                     statusMessage = "Order will be added to the database";
-                    request.setAttribute("message", statusMessage);
+                    request.getSession().setAttribute("messageSuccess", statusMessage);
                 }else{              
                     statusMessage = "Errors detected, Try a different Order Id";
-                    request.setAttribute("message", statusMessage);
+                    request.getSession().setAttribute("messageFailure", statusMessage);
                 }           
                 
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomerOrders.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("ListCustomerOrder");
 
             } catch (JMSException ex) {
                 ex.printStackTrace();
@@ -154,9 +153,8 @@ public class AddCustomerOrder extends HttpServlet {
         }
         else {
             statusMessage = "Adding failed, try filling all fields!";
-            request.setAttribute("message", statusMessage);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/JSP/listCustomerOrders.jsp");
-            rd.forward(request, response);
+            request.getSession().setAttribute("messageFailure", statusMessage);
+            response.sendRedirect("ListCustomerOrder");
         }
     }
 
