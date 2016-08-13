@@ -89,6 +89,7 @@
                                                     data-cid="${element.id}" data-cname="${element.name}"
                                                     data-caddress="${element.address}" data-contactNo="${element.contactNumber}">
                                                 <span class="glyphicon glyphicon-edit"></span>Update
+                                            </button>    
                                             <a type="button" class="btn btn-danger btn-sm" href=RemoveCustomer?id=${element.id}>
                                                 <span class="glyphicon glyphicon-trash"></span>Remove
                                             </a>    
