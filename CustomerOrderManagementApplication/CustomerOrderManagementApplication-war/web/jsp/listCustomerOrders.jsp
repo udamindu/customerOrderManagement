@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/customerOrderApp.js"></script>
+        <script type="text/javascript" src="js/customerApp.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -162,7 +162,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">View &amp; Edit Customers</h4>
                     </div>
-                    <form id="customer-add-form" action="/CustomerOrderManagementApplication-war/EditCustomer" method="post">
+                    <form id="customer-add-form" action="/CustomerOrderManagementApplication-war/UpdateCustomerOrder" method="post">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="orderId">Order No:</label>

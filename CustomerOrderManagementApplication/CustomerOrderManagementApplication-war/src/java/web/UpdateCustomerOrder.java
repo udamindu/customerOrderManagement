@@ -89,9 +89,9 @@ public class UpdateCustomerOrder extends HttpServlet {
             throws ServletException, IOException {
         String customerId = request.getParameter("customerId");
         String orderId = request.getParameter("orderId");
-        String dueDate = request.getParameter("dueDate");
-        String comment = request.getParameter("comment");
-        String amount = request.getParameter("amount");
+        String dueDate = request.getParameter("orderDueDate");
+        String comment = request.getParameter("orderComment");
+        String amount = request.getParameter("orderAmount");
         String message;
         CustomerOrderEntity customerOrder;
         
