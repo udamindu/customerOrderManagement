@@ -24,7 +24,6 @@ import javax.persistence.PersistenceContext;
     @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue")
 })
 public class NewCustomerOrder implements MessageListener {
-    
     @Resource
     private MessageDrivenContext mdc;
     @PersistenceContext(unitName = "CustomerOrderManagementApplication-ejbPU")

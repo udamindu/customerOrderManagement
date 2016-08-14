@@ -13,7 +13,6 @@ import java.util.Set;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.jms.*;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,18 +30,16 @@ import javax.validation.ValidatorFactory;
 @WebServlet(name = "AddCustomerOrder", urlPatterns = {"/AddCustomerOrder"})
 public class AddCustomerOrder extends HttpServlet {
     @EJB
-    private CustomerOrderFacade customerOrderFacade;
-    
+    private CustomerFacade customerFacade;
     @EJB
-    private CustomerFacade customerFacade;  
+    private CustomerOrderFacade customerOrderFacade;
     
     @Resource(mappedName="jms/NewCustomerOrderFactory")
     private ConnectionFactory connectionFactory;
 
     @Resource(mappedName="jms/NewCustomerOrder")
     private Queue queue;
-    
-    
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -109,12 +106,12 @@ public class AddCustomerOrder extends HttpServlet {
         String comment = request.getParameter("comment");
         String amount = request.getParameter("amount");
         String statusMessage;
-        
-        if((orderId != null) && (dueDate != null) && (comment != null) && (amount != null)){
-            try {                
+
+        if ((orderId != null) && (dueDate != null) && (comment != null) && (amount != null)) {
+            try {
                 Connection connection = connectionFactory.createConnection();
-                Session session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
-                        
+                Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
                 MessageProducer messageProducer = session.createProducer(queue);
 
                 ObjectMessage message = session.createObjectMessage();
@@ -125,36 +122,33 @@ public class AddCustomerOrder extends HttpServlet {
                 customerOrder.setComment(comment);
                 customerOrder.setAmount(Double.parseDouble(amount));
                 customerOrder.setCustomer(customerFacade.find(Long.parseLong(customerId)));
-                
-                System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-                
+
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
                 Set<ConstraintViolation<CustomerOrderEntity>> constraints = validator.validate(customerOrder);
                 String errors = "";
                 for (ConstraintViolation<CustomerOrderEntity> constraint : constraints) {
-                        errors += constraint.getMessage();
+                    errors += constraint.getMessage();
                 }
-                
-                if(errors.isEmpty()) {
+
+                if (errors.isEmpty()) {
                     message.setObject(customerOrder);
                     messageProducer.send(message);
                     messageProducer.close();
                     connection.close();
                     statusMessage = "Order will be added to the database";
                     request.getSession().setAttribute("messageSuccess", statusMessage);
-                }else{              
+                } else {
                     statusMessage = "Errors detected, Try a different Order Id";
                     request.getSession().setAttribute("messageFailure", statusMessage);
-                }           
-                
+                }
+
                 response.sendRedirect("ListCustomerOrder");
 
             } catch (JMSException ex) {
                 ex.printStackTrace();
             }
-        }
-        else {
+        } else {
             statusMessage = "Adding failed, try filling all fields!";
             request.getSession().setAttribute("messageFailure", statusMessage);
             response.sendRedirect("ListCustomerOrder");
