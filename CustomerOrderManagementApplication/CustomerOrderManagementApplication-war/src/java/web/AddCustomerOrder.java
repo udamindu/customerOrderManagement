@@ -34,10 +34,10 @@ public class AddCustomerOrder extends HttpServlet {
     @EJB
     private CustomerOrderFacade customerOrderFacade;
     
-    @Resource(mappedName="jms/NewCustomerOrderFactory")
+    @Resource(mappedName="jms/NewCustomerOrderMDBFactory")
     private ConnectionFactory connectionFactory;
 
-    @Resource(mappedName="jms/NewCustomerOrder")
+    @Resource(mappedName="jms/NewCustomerOrderMDB")
     private Queue queue;
 
     /**
