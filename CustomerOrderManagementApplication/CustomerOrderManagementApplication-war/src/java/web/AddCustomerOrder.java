@@ -109,40 +109,36 @@ public class AddCustomerOrder extends HttpServlet {
 
         if ((orderId != null) && (dueDate != null) && (comment != null) && (amount != null)) {
             try {
-                Connection connection = connectionFactory.createConnection();
-                Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-
-                MessageProducer messageProducer = session.createProducer(queue);
-
-                ObjectMessage message = session.createObjectMessage();
-                // here we create CustomerOrderEntity entity, that will be sent in JMS message
-                CustomerOrderEntity customerOrder = new CustomerOrderEntity();
-                customerOrder.setOrderId(orderId);
-                customerOrder.setDueDate(dueDate);
-                customerOrder.setComment(comment);
-                customerOrder.setAmount(Double.parseDouble(amount));
-                customerOrder.setCustomer(customerFacade.find(Long.parseLong(customerId)));
-
-                ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-                Validator validator = factory.getValidator();
-                Set<ConstraintViolation<CustomerOrderEntity>> constraints = validator.validate(customerOrder);
-                String errors = "";
-                for (ConstraintViolation<CustomerOrderEntity> constraint : constraints) {
-                    errors += constraint.getMessage();
+                //looking whether a customer order already exists
+                CustomerOrderEntity cusOrder = customerOrderFacade.find(orderId);
+                
+                if(cusOrder!=null){
+                    statusMessage = "Order Id already exists, Try a different Order Id";
+                    request.getSession().setAttribute("messageFailure", statusMessage);
                 }
+                else{
+                    Connection connection = connectionFactory.createConnection();
+                    
+                    //ensure enabling once only message delivery
+                    Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+                    MessageProducer messageProducer = session.createProducer(queue);
+                    ObjectMessage message = session.createObjectMessage();
+                    
+                    // here we create CustomerOrderEntity entity, that will be sent in JMS message
+                    CustomerOrderEntity customerOrder = new CustomerOrderEntity();
+                    customerOrder.setOrderId(orderId);
+                    customerOrder.setDueDate(dueDate);
+                    customerOrder.setComment(comment);
+                    customerOrder.setAmount(Double.parseDouble(amount));
+                    customerOrder.setCustomer(customerFacade.find(Long.parseLong(customerId)));
 
-                if (errors.isEmpty()) {
                     message.setObject(customerOrder);
                     messageProducer.send(message);
                     messageProducer.close();
                     connection.close();
                     statusMessage = "Order will be added to the database";
                     request.getSession().setAttribute("messageSuccess", statusMessage);
-                } else {
-                    statusMessage = "Errors detected, Try a different Order Id";
-                    request.getSession().setAttribute("messageFailure", statusMessage);
                 }
-
                 response.sendRedirect("ListCustomerOrder");
 
             } catch (JMSException ex) {

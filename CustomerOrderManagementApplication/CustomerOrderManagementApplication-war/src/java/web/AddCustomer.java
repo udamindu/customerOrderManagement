@@ -84,7 +84,6 @@ public class AddCustomer extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
         String name = request.getParameter("cname");
         String address = request.getParameter("caddress");
         String contact = request.getParameter("contactno");
