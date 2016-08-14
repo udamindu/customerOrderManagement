@@ -68,7 +68,7 @@
                     <h4>Sorry, No Customer Order data recorded</h4>
                 </c:when>
                 <c:otherwise>   
-                    <table class="table table-bordered"> 
+                    <table class="table table-striped table-hover"> 
                         <thead>
                             <tr>
                                 <th>Order No</th>
@@ -191,7 +191,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Edit</button>
-                            <button type="reset" class="btn btn-default">Reset</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>
