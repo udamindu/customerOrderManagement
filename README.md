@@ -7,6 +7,7 @@ An Enterprise Application which supports managing Customer and Order relationshi
 - glassfish server 3.1
 - Netbeans IDE 7.1
 - HTML 5
+- CSS
 - JSTL
 - Twitter Bootstrap
 - Jquery
