@@ -10,6 +10,7 @@ import ejb.CustomerOrderEntity;
 import ejb.CustomerOrderFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RemoveCustomer", urlPatterns = {"/RemoveCustomer"})
 public class RemoveCustomer extends HttpServlet {
+    @EJB
+    private CustomerOrderFacade customerOrderFacade;
     @EJB
     private CustomerFacade customerFacade;
 
@@ -74,13 +77,27 @@ public class RemoveCustomer extends HttpServlet {
         String customerId = request.getParameter("id");
         String message;
         CustomerEntity customer;
+        boolean state = false;
         
-        if(customerId != null){            
-            customer = customerFacade.find(Long.parseLong(customerId));
-            customerFacade.remove(customer);
-            message = "Customer removed successfully!";
-            request.getSession().setAttribute("messageSuccess", message);
-	    response.sendRedirect("ListCustomers");
+        if(customerId != null){ 
+            
+            List<CustomerOrderEntity> customerOrderList = customerOrderFacade.findAll();
+            for (CustomerOrderEntity customerOrderEntity : customerOrderList) {
+                if(customerId.equalsIgnoreCase(customerOrderEntity.getCustomer().getId()+"")){
+                    state = true;
+                }
+            }
+            if(state){
+                message = "Cannot remove the Customer. Orders exist for the Customer";
+                request.getSession().setAttribute("messageFailure", message);
+            }
+            else{
+                customer = customerFacade.find(Long.parseLong(customerId));
+                customerFacade.remove(customer);
+                message = "Customer removed successfully!";
+                request.getSession().setAttribute("messageSuccess", message);             
+            }
+            response.sendRedirect("ListCustomers");
         }
         else{
             message = "Failed to remove the customer";
