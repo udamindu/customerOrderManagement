@@ -119,7 +119,7 @@ public class AddCustomerOrder extends HttpServlet {
                 else{
                     Connection connection = connectionFactory.createConnection();
                     
-                    //ensure enabling once only message delivery
+                    //AUTO_ACKNOWLEDGE ensures enabling once only message delivery
                     Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
                     MessageProducer messageProducer = session.createProducer(queue);
                     ObjectMessage message = session.createObjectMessage();
