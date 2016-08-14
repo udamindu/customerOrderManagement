@@ -31,6 +31,7 @@ $(document).ready(function () {
         $('#orderAmount').val(orderamount);
         $('#orderDueDate').val(orderduedate);
         $('#orderComment').val(ordercomment);
+        $('#customerName').prop("readonly", true);
         $('#editCusOrderModal').modal('show');
     });
 });
