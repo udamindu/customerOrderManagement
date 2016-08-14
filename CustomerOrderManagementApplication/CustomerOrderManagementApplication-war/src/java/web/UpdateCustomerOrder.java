@@ -103,15 +103,13 @@ public class UpdateCustomerOrder extends HttpServlet {
             customerOrder.setAmount(Double.parseDouble(amount));
             customerOrderFacade.edit(customerOrder);
             message = "Customer Order updated successfully!";
-            request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/editCustomerOrder.jsp");
-            rd.forward(request, response);
+            request.getSession().setAttribute("messageSuccess", message);
+	    response.sendRedirect("ListCustomerOrder");
         }
         else{
             message = "Failed to update, try filling all fields!";
-            request.setAttribute("message", message);
-	    RequestDispatcher rd = getServletContext().getRequestDispatcher("/editCustomerOrder.jsp");
-            rd.forward(request, response);
+            request.getSession().setAttribute("messageFailure", message);
+	    response.sendRedirect("ListCustomerOrder");
         }
     }
 
