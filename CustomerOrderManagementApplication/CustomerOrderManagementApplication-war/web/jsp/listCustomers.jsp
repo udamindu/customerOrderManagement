@@ -64,7 +64,7 @@
         <div class="container-fluid table-responsive">             
             <c:choose>
                 <c:when test="${empty customerList}">
-                    <h4>No Customer data recorded</h4>
+                    <h4>Sorry, No Customer data recorded</h4>
                 </c:when>
                 <c:otherwise>   
                         <table class="table table-striped table-hover"> 
@@ -88,7 +88,7 @@
                                             <button name="editCustomer" class="btn btn-default btn-sm"
                                                     data-cid="${element.id}" data-cname="${element.name}"
                                                     data-caddress="${element.address}" data-ccontact="${element.contactNumber}">
-                                                <span class="glyphicon glyphicon-edit"></span>Update
+                                                <span class="glyphicon glyphicon-edit"></span>View and Update
                                             </button>    
                                             <a type="button" class="btn btn-danger btn-sm" href=RemoveCustomer?id=${element.id}>
                                                 <span class="glyphicon glyphicon-trash"></span>Remove
