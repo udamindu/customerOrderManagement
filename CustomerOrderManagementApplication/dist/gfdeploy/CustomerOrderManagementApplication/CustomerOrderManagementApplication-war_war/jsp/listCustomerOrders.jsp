@@ -169,8 +169,8 @@
                                 <input type="text" class="form-control" id="orderId" name="orderId"/>
                             </div>
                             <div class="form-group">
-                                <label for="customerId">Customer Id:</label>
-                                <input type="text" class="form-control" id="customerId" name="customerId" required/>
+                                <label for="customerIdd">Customer Id:</label>
+                                <input type="text" class="form-control" id="customerIdd" name="customerIdd" required/>
                             </div>
                             <div class="form-group">
                                 <label for="customerName">Customer Name:</label>

@@ -24,9 +24,10 @@ $(document).ready(function () {
         var orderamount = $(this).data("oamount");
         var orderduedate = $(this).data("oduedate");
         var ordercomment = $(this).data("ocomment");
+        alert(customerid);
    
         $('#orderId').val(orderid);
-        $('#customerId').val(customerid);
+        $('#customerIdd').val(customerid);
         $('#customerName').val(customername);
         $('#orderAmount').val(orderamount);
         $('#orderDueDate').val(orderduedate);
