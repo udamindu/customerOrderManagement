@@ -22,7 +22,7 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Customer Order Management Console</a>
+                    <a class="navbar-brand" href="#" style="color: #ff6600">Customer Order Management Console</a>
                 </div>
             </div>
         </nav>
@@ -41,7 +41,7 @@
                     </ol>
                 </div>
             </div>
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Customer Order</button>
+            <button type="button" class="btn btn-default btn-lg" style="color: #ff6600" data-toggle="modal" data-target="#myModal">Add Customer Order</button>
         </div>
         
         <!-- status message div -->
@@ -93,7 +93,7 @@
                                         <button name="editCustomerOrder" class="btn btn-default btn-sm"
                                                 data-oid="${element.orderId}" data-ocid="${element.customer.id}"
                                                 data-ocname="${element.customer.name}" data-oamount="${element.amount}"
-                                                data-oduedate="${element.dueDate}" data-ocomment="${element.comment}">
+                                                data-oduedate="${element.dueDate}" data-ocomment="${element.comment}" style="color: #ff6600">
                                             <span class="glyphicon glyphicon-edit"></span>View and Update
                                         </button>
                                     </td>         

@@ -22,7 +22,7 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Customer Order Management Console</a>
+                    <a class="navbar-brand" href="#" style="color: #ff6600">Customer Order Management Console</a>
                 </div>
             </div>
         </nav>
@@ -41,7 +41,7 @@
                 </div>
             </div>
             
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Customer</button>
+            <button type="button" class="btn btn-default btn-lg" style="color: #ff6600" data-toggle="modal" data-target="#myModal">Add Customer</button>
         </div>
         
         <div class="container-fluid">
@@ -87,10 +87,10 @@
                                         <td>
                                             <button name="editCustomer" class="btn btn-default btn-sm"
                                                     data-cid="${element.id}" data-cname="${element.name}"
-                                                    data-caddress="${element.address}" data-ccontact="${element.contactNumber}">
+                                                    data-caddress="${element.address}" data-ccontact="${element.contactNumber}" style="color: #ff6600">
                                                 <span class="glyphicon glyphicon-edit"></span>View and Update
                                             </button>    
-                                            <a type="button" class="btn btn-danger btn-sm" href=RemoveCustomer?id=${element.id}>
+                                            <a type="button" class="btn btn-default btn-sm" href=RemoveCustomer?id=${element.id} style="color: #ff6600">
                                                 <span class="glyphicon glyphicon-trash"></span>Remove
                                             </a>    
                                         </td>   
