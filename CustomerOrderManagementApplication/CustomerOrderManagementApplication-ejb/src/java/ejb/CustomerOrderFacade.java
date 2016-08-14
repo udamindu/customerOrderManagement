@@ -29,7 +29,7 @@ public class CustomerOrderFacade extends AbstractFacade<CustomerOrderEntity> {
     }
     
     public boolean hasOrders(String customerId){
-        boolean status = false;
+        boolean status;
         Query query = em.createQuery("Select e " + "from CUSTOMERORDERENTITY e " + "where e.CUSTOMER_ID = :customerId");
         List<CustomerOrderEntity> customerOrderList = query.getResultList();
         if(customerOrderList!=null){
