@@ -6,6 +6,8 @@ package web;
 
 import ejb.CustomerEntity;
 import ejb.CustomerFacade;
+import ejb.CustomerOrderEntity;
+import ejb.CustomerOrderFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -73,7 +75,7 @@ public class RemoveCustomer extends HttpServlet {
         String message;
         CustomerEntity customer;
         
-        if(customerId != null){
+        if(customerId != null){            
             customer = customerFacade.find(Long.parseLong(customerId));
             customerFacade.remove(customer);
             message = "Customer removed successfully!";

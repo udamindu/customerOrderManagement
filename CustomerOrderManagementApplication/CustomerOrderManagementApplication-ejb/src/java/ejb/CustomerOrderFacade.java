@@ -4,9 +4,11 @@
  */
 package ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -24,6 +26,19 @@ public class CustomerOrderFacade extends AbstractFacade<CustomerOrderEntity> {
 
     public CustomerOrderFacade() {
         super(CustomerOrderEntity.class);
+    }
+    
+    public boolean hasOrders(String customerId){
+        boolean status = false;
+        Query query = em.createQuery("Select e " + "from CUSTOMERORDERENTITY e " + "where e.CUSTOMER_ID = :customerId");
+        List<CustomerOrderEntity> customerOrderList = query.getResultList();
+        if(customerOrderList!=null){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
     }
     
 }
