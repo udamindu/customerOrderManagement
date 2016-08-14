@@ -19,17 +19,17 @@ import javax.persistence.PersistenceContext;
  *
  * @author Arunalu Hasakelum
  */
-@MessageDriven(mappedName = "jms/NewCustomerOrder", activationConfig = {
+@MessageDriven(mappedName = "jms/NewCustomerOrderMDB", activationConfig = {
     @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
     @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue")
 })
-public class NewCustomerOrder implements MessageListener {
+public class NewCustomerOrderMDB implements MessageListener {
     @Resource
     private MessageDrivenContext mdc;
     @PersistenceContext(unitName = "CustomerOrderManagementApplication-ejbPU")
-    private EntityManager em;
+    private EntityManager em;  
     
-    public NewCustomerOrder() {
+    public NewCustomerOrderMDB() {
     }
     
     @Override
