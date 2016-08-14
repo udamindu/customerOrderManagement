@@ -87,7 +87,7 @@ public class UpdateCustomerOrder extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String customerId = request.getParameter("customerId");
+        String customerId = request.getParameter("customerIdd");
         String orderId = request.getParameter("orderId");
         String dueDate = request.getParameter("orderDueDate");
         String comment = request.getParameter("orderComment");
