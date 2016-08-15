@@ -1,6 +1,6 @@
 # Customer Order Management Console
 
-An Enterprise Application which supports managing Customer and Order relationships. This application was intended to submit as an assignment given to me. JMS messaging queue concepts used to make asynchronize requests. Java Persistence Api is used as persistence level action privider. 
+An Enterprise Application which supports managing Customer and Order relationships. This application was intended to submit as an assignment given to me. JMS messaging queue concepts used to make asynchronize requests. Java Persistence Api is used for CRUD operations. 
     
 ##Tools and Technologies
 - Java Enterprise Edition 6
